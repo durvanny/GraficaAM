@@ -1,0 +1,33 @@
+clc
+clear
+close all
+% Cactersiticas de la señal moduladora (datos)
+fo = 20;
+A = 10;
+Fs = 20e3;
+t = 0:1/Fs:2;
+g = 2000;
+% Generacion de la señal moduladora
+y = A*sin(2*pi*fo*t);
+S(1) = subplot(3, 1, 1);
+plot(t(1:g), y(1:g), 'b',  'Linewidth', 1.5);
+title('\bfSeñal Moduladora');
+ylim([-10 10])
+
+% Generacion de la señal portadora
+Fc = 600;
+Ac = 10;
+por = Ac*sin(2*pi*Fc*t);
+S(2) = subplot(3, 1, 2);
+plot(t(1:g), por(1:g), 'b',  'Linewidth', 1.5);
+title('\bfSeñal Portadora');
+ylim([-10 10])
+
+% Modulacion de la señal
+ym = ammod(y,Fc,Fs,0, Ac);
+S(3) = subplot(3, 1, 3);
+plot(t(1:g), ym(1:g), 'b',  'Linewidth', 1.5)
+title('\bfSeñal modulada');
+ylim([-20 20])
+
+linkaxes(S, 'x');
